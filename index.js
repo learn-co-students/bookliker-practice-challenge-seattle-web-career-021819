@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {});
-
 const bookURL = "http://localhost:3000/books";
 const list = document.getElementById("list");
 const showPanel = document.getElementById("show-panel")
@@ -49,6 +47,7 @@ function bookInfo(book){
 
 function usersList(book){
   let usersList = document.createElement('ul');
+
   book.users.forEach(user => {
     let li = document.createElement('li')
     li.textContent = user.username;
@@ -58,11 +57,11 @@ function usersList(book){
 }
 
 function likeBook(book){
-  let newList = book.users.push({"id": 1, "username":"pouros"})
+  let newList = book.users.push({id: 1, username:"pouros"})
   let config = {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-    body: JSON.stringify({users: newList})
+    body: JSON.stringify({users: book.users})
   }
 
   fetch(bookURL + '/' + book.id, config).then(resp => resp.json()).then(data => {
